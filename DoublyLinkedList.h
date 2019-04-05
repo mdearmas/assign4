@@ -129,62 +129,71 @@ public:
 
   virtual void removeFront()
   {
-    ListNode<T> *curr = front;
-    if(size > 1)
+    if(!isEmpty())
     {
-      front = front->next;
-      front->prev = NULL;
-      curr->next = NULL;
+      ListNode<T> *curr = front;
+      if(size > 1)
+      {
+        front = front->next;
+        front->prev = NULL;
+        curr->next = NULL;
+      }
+      size--;
+      delete curr;
     }
-    size--;
-    delete curr;
   }
 
   virtual void removeBack()
   {
-    ListNode<T> *curr = back;
-    if(size > 1)
+    if(!isEmpty())
     {
-      back = back->prev;
-      back->next = NULL;
-      curr->prev = NULL;
+      ListNode<T> *curr = back;
+      if(size > 1)
+      {
+        back = back->prev;
+        back->next = NULL;
+        curr->prev = NULL;
+      }
+      size--;
+      delete curr;
     }
-    size--;
-    delete curr;
   }
 
   virtual void removePos(int k)
   {
-    int key = 0;
-    ListNode<T> *curr = front;
-    while(key != k)
+    if(!isEmpty())
     {
-      curr = curr->next;
-      ++key;
-      if(curr == NULL)
-        break;
-    }
-
-    if(curr != NULL)
-    {
-      if(curr == front)
-        front == curr->next;
-      else
+      int key = 0;
+      ListNode<T> *curr = front;
+      while(key != k)
       {
-        curr->prev->next = curr->next;
+        curr = curr->next;
+        ++key;
+        if(curr == NULL)
+          break;
       }
 
-      if(curr == back)
-        back == curr->prev;
-      else
+      if(curr != NULL)
       {
-        curr->next->prev = curr->prev;
-      }
+        if(curr == front)
+          front == curr->next;
+        else
+        {
+          curr->prev->next = curr->next;
+        }
 
-      curr->next = NULL;
-      curr->prev = NULL;
-      size--;
-      delete curr;
+        if(curr == back)
+          back == curr->prev;
+        else
+        {
+          curr->next->prev = curr->prev;
+        }
+
+        curr->next = NULL;
+        curr->prev = NULL;
+        size--;
+        delete curr;
+      }
     }
   }
 
@@ -192,6 +201,7 @@ public:
 
   virtual T begin() override { return front->data; }
   virtual T end() override { return back->data; }
+  int getSize() { return size; }
 };
 
 #endif
