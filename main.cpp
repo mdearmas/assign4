@@ -11,8 +11,7 @@ int main(int argc, char** argv)
 
   for(int i = 0; i < 2; ++i)
   {
-    cout << c.front() << endl;
-    c.dequeue();
+    cout << c.dequeue() << endl;
   }
 
   return 0;
