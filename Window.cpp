@@ -28,4 +28,5 @@ void Window::removeStudent()
 {
   curr_student = NULL;
   occupied = false;
+  cout << "Student has been removed." << endl;
 }
