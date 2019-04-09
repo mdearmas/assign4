@@ -1,9 +1,25 @@
 #include "Student.h"
 #include "Window.h"
 #include "Registrar.h"
+#include "Simulation.h"
 
 int main(int argc, char** argv)
 {
+  Simulation runner;
+  string filename;
+
+  cout << "Please enter the name of your file: " << endl;
+  cin >> filename;
+
+  if(runner.fileread(filename))
+  {
+
+  }
+  else
+  {
+    cout << "The file was not able to be opened. Exiting program." << endl;
+  }
+
   Registrar r(3);
   GenQueue<Student> *s = r.getStudentQueue();
   Student test[5];
