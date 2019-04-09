@@ -40,6 +40,25 @@ bool Registrar::freeWindows()
   return false;
 }
 
+bool Registrar::registrarFinished()
+{
+  if(!waiting_students->empty())
+  {
+    return false;
+  }
+  else
+  {
+    for(int i = 0; i < window_array_size; ++i)
+    {
+      if(window_array[i].isOccupied())
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
 Window* Registrar::findNextFreeWindow()
 {
   for(int i = 0; i < window_array_size; ++i)
@@ -61,12 +80,5 @@ void Registrar::registrarCycle()
   for(int i = 0; i < window_array_size; ++i)
   {
     window_array[i].windowCycle();
-  }
-
-  ListNode<Student> *curr = waiting_students->d->front;
-  while(curr != NULL)
-  {
-    curr->data.studentCycle();
-    curr = curr->next;
   }
 }

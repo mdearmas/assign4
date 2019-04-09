@@ -197,10 +197,10 @@ public:
     }
   }
 
-  virtual bool isEmpty() override { return (size == 0); }
+  virtual bool isEmpty() { return (size <= 0); }
 
-  virtual T begin() override { return front->data; }
-  virtual T end() override { return back->data; }
+  virtual T begin() { return front->data; }
+  virtual T end() { return back->data; }
   int getSize() { return size; }
 };
 

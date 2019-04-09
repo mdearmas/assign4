@@ -20,7 +20,7 @@ int main(int argc, char** argv)
     w->assignStudent(s->dequeue());
   }
 
-  while(!r.allWindowsEmpty())
+  while(!r.registrarFinished())
   {
     r.registrarCycle();
   }

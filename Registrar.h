@@ -17,6 +17,7 @@ public:
 
   bool allWindowsEmpty();
   bool freeWindows();
+  bool registrarFinished();
 
   Window* findNextFreeWindow();
 

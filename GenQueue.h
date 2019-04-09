@@ -28,6 +28,7 @@ public:
   T front() { return d->begin(); }
 
   int size() { return d->getSize(); }
+  
   bool empty() { return d->isEmpty(); }
 
   DoublyLinkedList<T> *d;
