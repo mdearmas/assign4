@@ -16,12 +16,12 @@ void Window::windowCycle()
     cout << "Occu time: "<< occupied_time << endl;
     if(occupied_time >= student_time_needed)
       removeStudent();
-    ++occupied_time;
+    occupied_time++;
   }
   else
   {
-    cout << "Idle time: "<< occupied_time << endl;
-    ++idle_time;
+    cout << "Idle time: "<< idle_time << endl;
+    idle_time++;
   }
 }
 

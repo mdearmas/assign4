@@ -8,13 +8,13 @@ using namespace std;
 class Student {
 public:
   Student();
-  Student(int a, int w, int t);
-
-  void studentCycle();
+  Student(int a, int t);
+  Student(const Student& s);
 
   int arrival_time; //int marking what minute the student will arrive
-  int wait_time; //int counting how long the student has been in the queue
   int time_needed; //int keeping track of how long a student needs at a window
+
+  Student& operator=(const Student &s); //redefines the assignment operator
 };
 
 #endif

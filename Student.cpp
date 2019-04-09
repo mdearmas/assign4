@@ -3,18 +3,26 @@
 Student::Student()
 {
   arrival_time = 0;
-  wait_time = 0;
   time_needed = 0;
 }
 
-Student::Student(int a, int w, int t)
+Student::Student(int a, int t)
 {
   arrival_time = a;
-  wait_time = w;
   time_needed = t;
 }
 
-void Student::studentCycle()
+Student::Student(const Student& s)
 {
-  ++wait_time;
+  arrival_time = s.arrival_time;
+  time_needed = s.time_needed;
+}
+
+Student& Student::operator=(const Student &s)
+{
+  if(this != &s)
+  {
+    arrival_time = s.arrival_time;
+    time_needed = s.time_needed;
+  }
 }
