@@ -5,7 +5,8 @@ Simulation::Simulation()
   r = new Registrar();
   student_deck = new Student[50];
   index = 0;
-  student_number = 0;
+  total_student_number = 0;
+  remaining_student_number = 0;
   array_size = 50;
 }
 
@@ -48,6 +49,7 @@ bool Simulation::fileread(string filename)
           else
           {
             r->resizeWindowArray(size);
+            cout << "Registrar has " << size << " windows open." << endl;
             first_line = false;
             expecting_time = true;
           }
@@ -59,6 +61,7 @@ bool Simulation::fileread(string filename)
             throw BadFileException("Incorrect file format.");
           else
           {
+            cout << "Arriving at " << arrival_time << endl;
             expecting_time = false;
             expecting_student_amount = true;
           }
@@ -70,6 +73,7 @@ bool Simulation::fileread(string filename)
             throw BadFileException("Incorrect file format.");
           else
           {
+            cout << "Expecting " << expected_students << endl;
             expecting_student_amount = false;
           }
         }
@@ -85,18 +89,21 @@ bool Simulation::fileread(string filename)
               resizeStudentDeck();
 
             student_deck[index] = Student(arrival_time, time_needed);
+            cout << "Student stored. " << endl;
 
             ++index;
-            ++student_number;
+            ++total_student_number;
             ++current_students;
 
             if(current_students == expected_students)
             {
               expecting_time = true;
+              current_students = 0;
             }
           }
         }
       }
+      remaining_student_number = total_student_number;
       input_file.close();
       return true;
     }
@@ -112,16 +119,45 @@ bool Simulation::fileread(string filename)
   }
 }
 
+void Simulation::addTimeMatches(int t)
+{
+  for(int i = (total_student_number - remaining_student_number); i < total_student_number; ++i)
+  {
+    if(t == student_deck[i].getArrivalTime())
+    {
+      r->addStudentToQueue(student_deck[i]);
+      remaining_student_number--;
+    }
+  }
+}
+
+void Simulation::moveStudents()
+{
+  while(!r->studentQueueEmpty() && r->freeWindows())
+  {
+    r->findNextFreeWindow();
+  }
+  r->registrarCycle();
+}
+
 void Simulation::resizeStudentDeck()
 {
   array_size = array_size * 2; //doubles the size of the array
   Student* new_deck = new Student[array_size]; //allocates an array of the new doubled size
 
-  for(int i = 0; i < student_number; ++i) //copies all elements of the existing array to the new array
+  for(int i = 0; i < total_student_number; ++i) //copies all elements of the existing array to the new array
   {
     new_deck[i] = student_deck[i];
   }
 
   delete[] student_deck; //deallocates the memory currently used by student_deck
   student_deck = new_deck; //assigns the location of new_deck to student_deck
+}
+
+bool Simulation::simulationOver()
+{
+  if(r->registrarFinished() && remaining_student_number<=0)
+    return true;
+  else
+    return false;
 }

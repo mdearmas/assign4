@@ -7,56 +7,26 @@ int main(int argc, char** argv)
 {
   Simulation runner;
   string filename;
+  int time = 1;
 
-  cout << "Please enter the name of your file: " << endl;
+  cout << "Please enter the name of your file: ";
   cin >> filename;
 
   if(runner.fileread(filename))
   {
-
+    while(true)
+    {
+      runner.addTimeMatches(time);
+      runner.moveStudents();
+      time++;
+      cout << "..." << endl;
+      if(runner.simulationOver()) //change to simulationOver()
+        break;
+    }
   }
   else
   {
     cout << "The file was not able to be opened. Exiting program." << endl;
-  }
-
-  Registrar r(3);
-  GenQueue<Student> *s = r.getStudentQueue();
-  Student test[5];
-  int test_size = 5;
-  int time = 1;
-
-  test[0] = Student(1, 5);
-  test[1] = Student(2, 3);
-  test[2] = Student(2, 1);
-  test[3] = Student(3, 2);
-  test[4] = Student(4, 4);
-
-  while(true)
-  {
-    //going to become addTimeMatches()
-    for(int i = 0; i < 5; ++i)
-    {
-      if(time == test[i].getArrivalTime())
-      {
-        r.addStudentToQueue(test[i]);
-        test_size--;
-      }
-    }
-    //end of addTimeMatches()
-
-    //going to become moveStudents()
-    while(!r.studentQueueEmpty() && r.freeWindows())
-    {
-      r.findNextFreeWindow();
-    }
-    r.registrarCycle();
-    //end of moveStudents()
-
-    time++;
-    cout << "..." << endl;
-    if(r.registrarFinished() && test_size==0) //change to simulationOver()
-      break;
   }
 
   return 0;
