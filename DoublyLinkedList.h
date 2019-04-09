@@ -19,7 +19,7 @@ public:
     prev = NULL;
   }
 
-  ~ListNode()
+  ~ListNode() //since nothing has been allocated with new, the destructor just ensures that the node's pointers are nulled out before proceeding
   {
     next = NULL;
     prev = NULL;

@@ -11,7 +11,11 @@ Window::Window()
 void Window::windowCycle()
 {
   if(occupied)
+  {
     ++occupied_time;
+    if(occupied_time == curr_student->time_needed)
+      removeStudent();
+  }
   else
   {
     ++idle_time;
@@ -22,6 +26,7 @@ void Window::assignStudent(Student s)
 {
   curr_student = &s;
   occupied = true;
+  cout << "Student with " << curr_student->time_needed << " minutes needed found a window. " << endl;
 }
 
 void Window::removeStudent()

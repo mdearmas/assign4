@@ -1,33 +1,28 @@
-#include "DoublyLinkedList.h"
-#include "GenQueue.h"
 #include "Student.h"
 #include "Window.h"
+#include "Registrar.h"
 
 int main(int argc, char** argv)
 {
-  GenQueue<int> c;
-  c.enqueue(2);
-  c.enqueue(3);
-  c.enqueue(4);
-  c.dequeue();
+  Registrar r(3);
+  GenQueue<Student> *s = r.waiting_students;
+  Window *w = r.window_array;
 
-  for(int i = 0; i < 2; ++i)
+  for(int i = 0; i < 3; ++i)
   {
-    cout << c.dequeue() << endl;
+    Student s(1, 0, i+1);
+    r.addStudentToQueue(s);
   }
 
-  Student s(1, 0, 2);
-  Window w;
-  w.assignStudent(s);
-
-  for(int i = 1; i < 4; ++i)
+  while(r.freeWindows())
   {
-    w.windowCycle();
-    if(w.occupied_time == s.time_needed)
-    {
-      w.removeStudent();
-      break;
-    }
+    Window *w = r.findNextFreeWindow();
+    w->assignStudent(s->dequeue());
+  }
+
+  while(!r.allWindowsEmpty())
+  {
+    r.registrarCycle();
   }
 
   return 0;
