@@ -2,8 +2,8 @@
 
 Registrar::Registrar()
 {
-  window_array = new Window[10];
-  window_array_size = 10;
+  window_array = new Window[5];
+  window_array_size = 5;
   waiting_students = new GenQueue<Student>();
 }
 
@@ -83,4 +83,11 @@ void Registrar::registrarCycle()
   {
     window_array[i].windowCycle();
   }
+}
+
+void Registrar::resizeWindowArray(int size)
+{
+  delete[] window_array;
+  window_array_size = size;
+  window_array = new Window[size];
 }

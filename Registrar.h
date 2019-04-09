@@ -22,6 +22,7 @@ public:
   void findNextFreeWindow();
   void addStudentToQueue(Student s);
   void registrarCycle();
+  void resizeWindowArray(int size);
 
   GenQueue<Student>* getStudentQueue() { return waiting_students; }
   bool studentQueueEmpty() { return (waiting_students->empty()); }

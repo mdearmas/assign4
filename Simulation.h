@@ -9,7 +9,7 @@ public:
   void fileread(string filename);
   void addTimeMatches(int t); //adds all Students for which arrival_time == t to the Registrar's waiting_students queue
   void moveStudents(); //if there are free windows in the registar and students waiting, free windows are filled with students. then registrarCycle is called.
-  void resize(); //resizes student_deck array
+  void resizeStudentDeck(); //resizes student_deck array
 
   bool noStudentsRemaining() { return (student_number <= 0); } //bool, returns true if there are still students on deck to enter the registrar
   bool studentDeckFull() { return (student_number == array_size); }
