@@ -24,6 +24,7 @@ public:
   void registrarCycle();
 
   GenQueue<Student>* getStudentQueue() { return waiting_students; }
+  bool studentQueueEmpty() { return (waiting_students->empty()); }
 
 private:
   Window* window_array;

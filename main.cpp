@@ -18,6 +18,7 @@ int main(int argc, char** argv)
 
   while(true)
   {
+    //going to become addTimeMatches()
     for(int i = 0; i < 5; ++i)
     {
       if(time == test[i].getArrivalTime())
@@ -26,14 +27,19 @@ int main(int argc, char** argv)
         test_size--;
       }
     }
-    while(!s->empty() && r.freeWindows())
+    //end of addTimeMatches()
+
+    //going to become moveStudents()
+    while(!r.studentQueueEmpty() && r.freeWindows())
     {
       r.findNextFreeWindow();
     }
     r.registrarCycle();
+    //end of moveStudents()
+
     time++;
     cout << "..." << endl;
-    if(r.registrarFinished() && test_size==0)
+    if(r.registrarFinished() && test_size==0) //change to simulationOver()
       break;
   }
 
