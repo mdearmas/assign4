@@ -64,7 +64,7 @@ Window* Registrar::findNextFreeWindow()
   for(int i = 0; i < window_array_size; ++i)
   {
     if(!window_array[i].isOccupied())
-      return &window_array[i];
+      return &(window_array[i]);
   }
   return NULL;
 }
