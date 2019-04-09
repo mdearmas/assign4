@@ -5,6 +5,7 @@ Window::Window()
   occupied = false;
   idle_time = 0;
   occupied_time = 0;
+  student_time_needed = 0;
   curr_student = NULL;
 }
 
@@ -12,12 +13,14 @@ void Window::windowCycle()
 {
   if(occupied)
   {
-    ++occupied_time;
-    if(occupied_time == curr_student->time_needed)
+    cout << "Occu time: "<< occupied_time << endl;
+    if(occupied_time >= student_time_needed)
       removeStudent();
+    ++occupied_time;
   }
   else
   {
+    cout << "Idle time: "<< occupied_time << endl;
     ++idle_time;
   }
 }
@@ -26,12 +29,15 @@ void Window::assignStudent(Student s)
 {
   curr_student = &s;
   occupied = true;
-  cout << "Student with " << curr_student->time_needed << " minutes needed found a window. " << endl;
+  student_time_needed = curr_student->time_needed;
+  cout << "Student with " << student_time_needed << " minutes needed found a window. " << endl;
 }
 
 void Window::removeStudent()
 {
+  cout << "Student " << student_time_needed << " has been removed." << endl;
   curr_student = NULL;
   occupied = false;
-  cout << "Student has been removed." << endl;
+  occupied_time = 0;
+  student_time_needed = 0;
 }

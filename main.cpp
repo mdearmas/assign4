@@ -6,23 +6,23 @@ int main(int argc, char** argv)
 {
   Registrar r(3);
   GenQueue<Student> *s = r.waiting_students;
-  Window *w = r.window_array;
 
-  for(int i = 0; i < 3; ++i)
+  for(int i = 5; i > 0; --i)
   {
-    Student s(1, 0, i+1);
+    Student s(1, 0, i);
     r.addStudentToQueue(s);
   }
 
-  while(r.freeWindows())
+  while(true)
   {
-    Window *w = r.findNextFreeWindow();
-    w->assignStudent(s->dequeue());
-  }
-
-  while(!r.registrarFinished())
-  {
+    while(!s->empty() && r.freeWindows())
+    {
+      r.findNextFreeWindow();
+    }
     r.registrarCycle();
+    cout << "..." << endl;
+    if(r.registrarFinished())
+      break;
   }
 
   return 0;

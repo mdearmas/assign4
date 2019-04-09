@@ -59,14 +59,16 @@ bool Registrar::registrarFinished()
   }
 }
 
-Window* Registrar::findNextFreeWindow()
+void Registrar::findNextFreeWindow()
 {
   for(int i = 0; i < window_array_size; ++i)
   {
     if(!window_array[i].isOccupied())
-      return &(window_array[i]);
+    {
+      window_array[i].assignStudent(waiting_students->dequeue());
+      break;
+    }
   }
-  return NULL;
 }
 
 void Registrar::addStudentToQueue(Student s)

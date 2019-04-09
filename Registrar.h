@@ -19,7 +19,7 @@ public:
   bool freeWindows();
   bool registrarFinished();
 
-  Window* findNextFreeWindow();
+  void findNextFreeWindow();
 
   void addStudentToQueue(Student s);
   void registrarCycle();

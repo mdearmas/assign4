@@ -20,15 +20,22 @@ public:
 
   T dequeue()
   {
-    T temp = d->begin();
-    d->removeFront();
-    return temp;
+    if(empty())
+    {
+      cout << "ERROR: Attempted to dequeue an empty queue." << endl;
+    }
+    else
+    {
+      T temp = d->begin();
+      d->removeFront();
+      return temp;
+    }
   }
 
   T front() { return d->begin(); }
 
   int size() { return d->getSize(); }
-  
+
   bool empty() { return d->isEmpty(); }
 
   DoublyLinkedList<T> *d;
