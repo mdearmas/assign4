@@ -74,7 +74,7 @@ void Registrar::findNextFreeWindow()
 void Registrar::addStudentToQueue(Student s)
 {
   waiting_students->enqueue(s);
-  cout << "Student with " << s.time_needed << " minutes needed added to queue. " << endl;
+  cout << "Student with " << s.getTimeNeeded() << " minutes needed added to queue. " << endl;
 }
 
 void Registrar::registrarCycle()

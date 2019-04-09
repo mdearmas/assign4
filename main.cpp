@@ -5,7 +5,7 @@
 int main(int argc, char** argv)
 {
   Registrar r(3);
-  GenQueue<Student> *s = r.waiting_students;
+  GenQueue<Student> *s = r.getStudentQueue();
   Student test[5];
   int test_size = 5;
   int time = 1;
@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   {
     for(int i = 0; i < 5; ++i)
     {
-      if(time == test[i].arrival_time)
+      if(time == test[i].getArrivalTime())
       {
         r.addStudentToQueue(test[i]);
         test_size--;

@@ -11,10 +11,14 @@ public:
   Student(int a, int t);
   Student(const Student& s);
 
-  int arrival_time; //int marking what minute the student will arrive
-  int time_needed; //int keeping track of how long a student needs at a window
+  int getArrivalTime() { return arrival_time; }
+  int getTimeNeeded() { return time_needed; }
 
   Student& operator=(const Student &s); //redefines the assignment operator
+
+private:
+  int arrival_time; //int marking what minute the student will arrive
+  int time_needed; //int keeping track of how long a student needs at a window
 };
 
 #endif

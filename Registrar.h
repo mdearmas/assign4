@@ -20,10 +20,12 @@ public:
   bool registrarFinished();
 
   void findNextFreeWindow();
-
   void addStudentToQueue(Student s);
   void registrarCycle();
 
+  GenQueue<Student>* getStudentQueue() { return waiting_students; }
+
+private:
   Window* window_array;
   int window_array_size;
   GenQueue<Student> *waiting_students;
