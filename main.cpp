@@ -20,11 +20,12 @@ int main(int argc, char** argv)
       runner.addTimeMatches(time);
       runner.moveStudents(time);
       time++;
-      cout << "..." << endl;
       if(runner.simulationOver()) //change to simulationOver()
         break;
     }
-    runner.printRegistrar();
+    cout << "All students have been served, and the simulation has finished. Here are the results. " << endl;
+    cout << endl;
+    runner.printAnalytics();
   }
   else
   {

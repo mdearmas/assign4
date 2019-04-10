@@ -76,6 +76,7 @@ void Registrar::findNextFreeWindow(int time)
       window_idles->addTime(window_array[i].getIdleTime());
       student_waits->addTime(time - waiting_students->front().getArrivalTime());
       window_array[i].assignStudent(waiting_students->dequeue());
+      cout << "Window " << i + 1 << " has begun serving a student (" << window_array[i].getStudentTime() << " minutes needed)." << endl;
       break;
     }
   }
@@ -84,7 +85,7 @@ void Registrar::findNextFreeWindow(int time)
 void Registrar::addStudentToQueue(Student s)
 {
   waiting_students->enqueue(s);
-  cout << "Student with " << s.getTimeNeeded() << " minutes needed added to queue. " << endl;
+  cout << "A student (needs " << s.getTimeNeeded() << " minutes) has gotten in line. " << endl;
 }
 
 void Registrar::registrarCycle()
@@ -102,10 +103,21 @@ void Registrar::resizeWindowArray(int size)
   window_array = new Window[size];
 }
 
-void Registrar::printTimeCollectors()
+void Registrar::printWindowIdleData()
 {
-  cout << "Window Idles: " << endl;
-  window_idles->printList();
-  cout << "Student Waits: " << endl;
-  student_waits->printList();
+  cout << "WINDOW DATA: " << endl;
+  cout << "Average Idle Time: " << window_idles->mean() << " minutes" << endl;
+  cout << "Longest Idle Time: " << window_idles->max() << " minutes" << endl;
+  cout << "Number of windows idle for over 5 minutes: " << window_idles->numberAbove(5) << endl;
+  cout << endl;
+}
+
+void Registrar::printStudentWaitData()
+{
+  cout << "STUDENT DATA: " << endl;
+  cout << "Average Wait Time: " << student_waits->mean() << " minutes" << endl;
+  cout << "Median Wait Time: " << student_waits->median() << " minutes" << endl;
+  cout << "Longest Wait Time: " << student_waits->max() << " minutes" << endl;
+  cout << "Number of windows idle for over 10 minutes: " << student_waits->numberAbove(10) << endl;
+  cout << endl;
 }

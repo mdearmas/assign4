@@ -62,7 +62,6 @@ bool Simulation::fileread(string filename)
             throw BadFileException("ERROR: incorrect file format");
           else
           {
-            cout << "Arriving at " << arrival_time << endl;
             expecting_time = false;
             expecting_student_amount = true;
           }
@@ -74,7 +73,6 @@ bool Simulation::fileread(string filename)
             throw BadFileException("ERROR: incorrect file format");
           else
           {
-            cout << "Expecting " << expected_students << endl;
             expecting_student_amount = false;
           }
         }
@@ -90,7 +88,6 @@ bool Simulation::fileread(string filename)
               resizeStudentDeck();
 
             student_deck[index] = Student(arrival_time, time_needed);
-            cout << "Student stored. " << endl;
 
             ++index;
             ++total_student_number;
@@ -123,6 +120,14 @@ bool Simulation::fileread(string filename)
   {
     return false;
   }
+}
+
+bool Simulation::simulationOver()
+{
+  if(r->registrarFinished() && remaining_student_number<=0)
+    return true;
+  else
+    return false;
 }
 
 void Simulation::addTimeMatches(int t)
@@ -160,15 +165,8 @@ void Simulation::resizeStudentDeck()
   student_deck = new_deck; //assigns the location of new_deck to student_deck
 }
 
-void Simulation::printRegistrar()
+void Simulation::printAnalytics()
 {
-  r->printTimeCollectors();
-}
-
-bool Simulation::simulationOver()
-{
-  if(r->registrarFinished() && remaining_student_number<=0)
-    return true;
-  else
-    return false;
+  r->printStudentWaitData();
+  r->printWindowIdleData();
 }

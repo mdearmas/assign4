@@ -24,7 +24,8 @@ public:
   void addStudentToQueue(Student s);
   void registrarCycle();
   void resizeWindowArray(int size);
-  void printTimeCollectors();
+  void printWindowIdleData();
+  void printStudentWaitData();
 
   GenQueue<Student>* getStudentQueue() { return waiting_students; }
   bool studentQueueEmpty() { return (waiting_students->empty()); }

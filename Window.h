@@ -16,8 +16,9 @@ public:
   void removeStudent();
 
   bool isOccupied() { return occupied; }
-  
+
   int getIdleTime() { return idle_time; }
+  int getStudentTime() { return student_time_needed; }
 
 private:
   bool occupied; //bool to see if a student is currently occupying the window

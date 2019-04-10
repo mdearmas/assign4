@@ -12,13 +12,13 @@ public:
 
   void addTime(int i);
   void swapSort();
-  void printList();
+  //void printList();
   void resize();
 
-  int mean();
+  double mean();
   int median();
   int max();
-  int numberAbove(int i);
+  int numberAbove(int k);
 
 private:
   int *array;
