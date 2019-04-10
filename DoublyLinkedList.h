@@ -30,6 +30,14 @@ public:
   ListNode<T>* prev;
 };
 
+class EmptyListException //class definition for an exception that is thrown if the file has incorrect format
+{
+public:
+  EmptyListException(string message) : error_message(message) { } //constructor with initializer list
+  string getErrorMessage() { return error_message; } //accessor that returns the error message
+private:
+  string error_message; //the error message associated with the error object
+};
 
 template <typename T>
 class DoublyLinkedList : public GenList<T> {
@@ -129,78 +137,137 @@ public:
 
   virtual void removeFront()
   {
-    if(!isEmpty())
+    try
     {
-      ListNode<T> *curr = front;
-      if(size > 1)
+      if(isEmpty())
+        throw EmptyListException("ERROR: cannot remove a node from an empty list");
+      else
       {
-        front = front->next;
-        front->prev = NULL;
-        curr->next = NULL;
+        ListNode<T> *curr = front;
+        if(size > 1)
+        {
+          front = front->next;
+          front->prev = NULL;
+          curr->next = NULL;
+        }
+        size--;
+        delete curr;
       }
-      size--;
-      delete curr;
+    }
+    catch(EmptyListException& e)
+    {
+      cout << e.getErrorMessage() << endl;
     }
   }
 
   virtual void removeBack()
   {
-    if(!isEmpty())
+    try
     {
-      ListNode<T> *curr = back;
-      if(size > 1)
+      if(isEmpty())
+        throw EmptyListException("ERROR: cannot remove a node from an empty list");
+      else
       {
-        back = back->prev;
-        back->next = NULL;
-        curr->prev = NULL;
+        ListNode<T> *curr = back;
+        if(size > 1)
+        {
+          back = back->prev;
+          back->next = NULL;
+          curr->prev = NULL;
+        }
+        size--;
+        delete curr;
       }
-      size--;
-      delete curr;
+    }
+    catch(EmptyListException& e)
+    {
+      cout << e.getErrorMessage() << endl;
     }
   }
 
   virtual void removePos(int k)
   {
-    if(!isEmpty())
+    try
     {
-      int key = 0;
-      ListNode<T> *curr = front;
-      while(key != k)
+      if(isEmpty())
+        throw EmptyListException("ERROR: cannot remove a node from an empty list");
+      else
       {
-        curr = curr->next;
-        ++key;
-        if(curr == NULL)
-          break;
-      }
-
-      if(curr != NULL)
-      {
-        if(curr == front)
-          front == curr->next;
-        else
+        int key = 0;
+        ListNode<T> *curr = front;
+        while(key != k)
         {
-          curr->prev->next = curr->next;
+          curr = curr->next;
+          ++key;
+          if(curr == NULL)
+            break;
         }
 
-        if(curr == back)
-          back == curr->prev;
-        else
+        if(curr != NULL)
         {
-          curr->next->prev = curr->prev;
-        }
+          if(curr == front)
+            front == curr->next;
+          else
+          {
+            curr->prev->next = curr->next;
+          }
 
-        curr->next = NULL;
-        curr->prev = NULL;
-        size--;
-        delete curr;
+          if(curr == back)
+            back == curr->prev;
+          else
+          {
+            curr->next->prev = curr->prev;
+          }
+
+          curr->next = NULL;
+          curr->prev = NULL;
+          size--;
+          delete curr;
+        }
       }
+    }
+    catch(EmptyListException& e)
+    {
+      cout << e.getErrorMessage() << endl;
+    }
+  }
+
+
+  virtual T begin()
+  {
+    try
+    {
+      if(isEmpty())
+        throw EmptyListException("ERROR: list is empty");
+      else
+      {
+        return front->data;
+      }
+    }
+    catch(EmptyListException& e)
+    {
+      cout << e.getErrorMessage() << endl;
+    }
+  }
+
+  virtual T end()
+  {
+    try
+    {
+      if(isEmpty())
+        throw EmptyListException("ERROR: list is empty");
+      else
+      {
+        return back->data;
+      }
+    }
+    catch(EmptyListException& e)
+    {
+      cout << e.getErrorMessage() << endl;
     }
   }
 
   virtual bool isEmpty() { return (size <= 0); }
-
-  virtual T begin() { return front->data; }
-  virtual T end() { return back->data; }
   int getSize() { return size; }
 };
 

@@ -20,16 +20,22 @@ public:
 
   T dequeue()
   {
-    if(empty())
+    try
     {
-      cout << "ERROR: Attempted to dequeue an empty queue." << endl;
+      if(empty())
+        throw EmptyListException("ERROR: attempted to dequeue an empty queue");
+      else
+      {
+        T temp = d->begin();
+        d->removeFront();
+        return temp;
+      }
     }
-    else
+    catch(EmptyListException& e)
     {
-      T temp = d->begin();
-      d->removeFront();
-      return temp;
+      cout << e.getErrorMessage() << endl;
     }
+
   }
 
   T front() { return d->begin(); }
