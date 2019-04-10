@@ -1,6 +1,7 @@
-#include <iostream>
+#ifndef TIMECOLLECTOR_H_
+#define TIMECOLLECTOR_H_
 
-#include "DoublyLinkedList.h"
+#include <iostream>
 
 using namespace std;
 
@@ -10,11 +11,19 @@ public:
   ~TimeCollector();
 
   void addTime(int i);
+  void swapSort();
+  void printList();
+  void resize();
+
   int mean();
   int median();
   int max();
   int numberAbove(int i);
 
 private:
-  DoublyLinkedList<int> d;
-}
+  int *array;
+  int array_size;
+  int index;
+};
+
+#endif

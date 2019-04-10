@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Registrar.h"
 #include "Simulation.h"
+#include "TimeCollector.h"
 
 int main(int argc, char** argv)
 {
