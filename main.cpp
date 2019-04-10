@@ -18,12 +18,13 @@ int main(int argc, char** argv)
     while(true)
     {
       runner.addTimeMatches(time);
-      runner.moveStudents();
+      runner.moveStudents(time);
       time++;
       cout << "..." << endl;
       if(runner.simulationOver()) //change to simulationOver()
         break;
     }
+    runner.printRegistrar();
   }
   else
   {

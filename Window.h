@@ -16,7 +16,10 @@ public:
   void removeStudent();
 
   bool isOccupied() { return occupied; }
+  
+  int getIdleTime() { return idle_time; }
 
+private:
   bool occupied; //bool to see if a student is currently occupying the window
   int idle_time; //int counting how long this window has been unoccupied
   int occupied_time; //int counting how long a student has been at the window

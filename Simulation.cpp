@@ -4,6 +4,7 @@ Simulation::Simulation()
 {
   r = new Registrar();
   student_deck = new Student[50];
+
   index = 0;
   total_student_number = 0;
   remaining_student_number = 0;
@@ -45,7 +46,7 @@ bool Simulation::fileread(string filename)
         {
           size = stoi(line);
           if(size < 1 || input_file.fail())
-            throw BadFileException("Incorrect file format.");
+            throw BadFileException("ERROR: incorrect file format");
           else
           {
             r->resizeWindowArray(size);
@@ -58,7 +59,7 @@ bool Simulation::fileread(string filename)
         {
           arrival_time = stoi(line);
           if(arrival_time < 1 || input_file.fail())
-            throw BadFileException("Incorrect file format.");
+            throw BadFileException("ERROR: incorrect file format");
           else
           {
             cout << "Arriving at " << arrival_time << endl;
@@ -70,7 +71,7 @@ bool Simulation::fileread(string filename)
         {
           expected_students = stoi(line);
           if(expected_students < 1 || input_file.fail())
-            throw BadFileException("Incorrect file format.");
+            throw BadFileException("ERROR: incorrect file format");
           else
           {
             cout << "Expecting " << expected_students << endl;
@@ -82,7 +83,7 @@ bool Simulation::fileread(string filename)
           time_needed = stoi(line);
 
           if(time_needed < 1 || input_file.fail())
-            throw BadFileException("Incorrect file format.");
+            throw BadFileException("ERROR: incorrect file format");
           else
           {
             if(studentDeckFull())
@@ -112,6 +113,11 @@ bool Simulation::fileread(string filename)
       cout << e.getErrorMessage() << endl;
       return false;
     }
+    catch(const invalid_argument& ia) //Source: http://www.cplusplus.com/reference/stdexcept/invalid_argument/
+    {
+      cout << "ERROR: incorrect file format" << endl;
+      return false;
+    }
   }
   else
   {
@@ -131,11 +137,11 @@ void Simulation::addTimeMatches(int t)
   }
 }
 
-void Simulation::moveStudents()
+void Simulation::moveStudents(int t)
 {
   while(!r->studentQueueEmpty() && r->freeWindows())
   {
-    r->findNextFreeWindow();
+    r->findNextFreeWindow(t);
   }
   r->registrarCycle();
 }
@@ -152,6 +158,11 @@ void Simulation::resizeStudentDeck()
 
   delete[] student_deck; //deallocates the memory currently used by student_deck
   student_deck = new_deck; //assigns the location of new_deck to student_deck
+}
+
+void Simulation::printRegistrar()
+{
+  r->printTimeCollectors();
 }
 
 bool Simulation::simulationOver()

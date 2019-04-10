@@ -29,6 +29,7 @@ void Window::assignStudent(Student s)
 {
   curr_student = &s;
   occupied = true;
+  idle_time = 0;
   student_time_needed = curr_student->getTimeNeeded();
   cout << "Student with " << student_time_needed << " minutes needed found a window. " << endl;
 }
