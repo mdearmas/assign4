@@ -1,3 +1,13 @@
+/*
+  Makenzie De Armas
+  ID: 2278709
+  dearm102@mail.chapman.edu
+  CPSC 350-01
+  Assignment 4: Registrar's Office Simulation
+  Purpose: This file, Window.h, contains the definition for the Window class. The class includes a bool to indicate if it's occupied,
+  ints to keep track of both the Window's time occupied by a student and its idle time, a pointer to a student currently at the window,
+  and an int to store said student's time needed at the window (to avoid any errors with pointer assignment)
+*/
 #ifndef WINDOW_H_
 #define WINDOW_H_
 
@@ -9,14 +19,14 @@ using namespace std;
 
 class Window {
 public:
-  Window();
+  Window(); //constructor
 
-  void windowCycle();
-  void assignStudent(Student s);
-  void removeStudent();
+  void windowCycle(); //increments idle_time if not occupied, increments occupied_time if occupied, and removes assigned student if time's up
+  void assignStudent(Student s); //assigns a student to the window
+  void removeStudent(); //removes a student from a window
 
-  bool isOccupied() { return occupied; }
-
+  //accessor methods
+  bool isOccupied() { return occupied; } 
   int getIdleTime() { return idle_time; }
   int getStudentTime() { return student_time_needed; }
 
