@@ -118,6 +118,6 @@ void Registrar::printStudentWaitData()
   cout << "Average Wait Time: " << student_waits->mean() << " minutes" << endl;
   cout << "Median Wait Time: " << student_waits->median() << " minutes" << endl;
   cout << "Longest Wait Time: " << student_waits->max() << " minutes" << endl;
-  cout << "Number of windows idle for over 10 minutes: " << student_waits->numberAbove(10) << endl;
+  cout << "Number of students waiting for over 10 minutes: " << student_waits->numberAbove(10) << endl;
   cout << endl;
 }
