@@ -1,8 +1,17 @@
+/*
+  Makenzie De Armas
+  ID: 2278709
+  dearm102@mail.chapman.edu
+  CPSC 350-01
+  Assignment 4: Registrar's Office Simulation
+  Purpose: This file, Simulation.h, contains the definition for the Simulation class, which controls user input and overarching simulation management.
+  This also includes the class definition for a BadFileException, which is thrown if file input is incorrect.
+*/
 #ifndef SIMULATION_H_
 #define SIMULATION_H_
 
 #include <iostream>
-#include <fstream>
+#include <fstream> //allows us access to file I/O
 
 #include "Registrar.h"
 #include "Student.h"
@@ -11,28 +20,28 @@ using namespace std;
 
 class Simulation {
 public:
-  Simulation();
-  ~Simulation();
+  Simulation(); //default constructor
+  ~Simulation(); //destructor
 
-  bool fileread(string filename);
-  bool simulationOver();
+  bool fileread(string filename); //reads in a file and creates the necessary objects for the simulation to run
+  bool simulationOver(); //checks if registrarFinished == true and if there are any students still in the deck waiting to arrive
 
   void addTimeMatches(int t); //adds all Students for which arrival_time == t to the Registrar's waiting_students queue
-  void moveStudents(int t); //if there are free windows in the registar and students waiting, free windows are filled with students. then registrarCycle is called.
+  void moveStudents(int t); //if there are free windows in the registrar and students waiting, free windows are filled with students. then registrarCycle is called.
   void resizeStudentDeck(); //resizes student_deck array
-  void printAnalytics();
+  void printAnalytics(); //runs both the registrar's printWindowIdleData and printStudentWaitData
 
-  bool noStudentsRemaining() { return (remaining_student_number <= 0); } //bool, returns true if there are still students on deck to enter the registrar
-  bool studentDeckFull() { return (total_student_number == array_size); }
+  bool noStudentsRemaining() { return (remaining_student_number <= 0); } //returns true if there are still students on deck to enter the registrar
+  bool studentDeckFull() { return (total_student_number == array_size); } //returns true if the total number of students equals the max capacity of the array
 
 private:
-  Registrar* r;
-  Student* student_deck;
+  Registrar* r; //the Registrar office space for the simulation
+  Student* student_deck; //an array containing the list of students who will arrive over the course of the simulation (but have not yet arrived in the office space)
 
-  int index;
-  int total_student_number;
-  int remaining_student_number;
-  int array_size;
+  int index; //the index of the student_deck to keep track of where the next student goes in the array
+  int total_student_number; //the total number of students
+  int remaining_student_number; //the number of students still waiting to enter the registrar
+  int array_size; //the max size of the student_deck array
 };
 
 class BadFileException //class definition for an exception that is thrown if the file has incorrect format

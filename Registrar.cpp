@@ -4,7 +4,7 @@
   dearm102@mail.chapman.edu
   CPSC 350-01
   Assignment 4: Registrar's Office Simulation
-  Purpose: This file, Registrar.h, contains the out-of-class member functions for Registrar.
+  Purpose: This file, Registrar.cpp, contains the out-of-class member functions for Registrar.
 */
 #include "Registrar.h"
 
@@ -30,7 +30,7 @@ Registrar::Registrar(int w) //overloaded constructor, makes the window array the
 
 Registrar::~Registrar() //destructor
 {
-  delete[] window_array;
+  delete[] window_array; //deallocates array
   delete waiting_students;
   delete window_idles;
   delete student_waits;
