@@ -21,12 +21,12 @@ class Window {
 public:
   Window(); //constructor
 
-  void windowCycle(); //increments idle_time if not occupied, increments occupied_time if occupied, and removes assigned student if time's up
+  void windowCycle(); //represents the passing of time: increments idle_time if not occupied, increments occupied_time if occupied, and removes assigned student if time's up
   void assignStudent(Student s); //assigns a student to the window
   void removeStudent(); //removes a student from a window
 
   //accessor methods
-  bool isOccupied() { return occupied; } 
+  bool isOccupied() { return occupied; }
   int getIdleTime() { return idle_time; }
   int getStudentTime() { return student_time_needed; }
 
