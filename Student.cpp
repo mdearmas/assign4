@@ -10,8 +10,9 @@
 
 Student::Student() //default constructor
 {
-  arrival_time = 0;
-  time_needed = 0;
+  //setting to negative prevents any accidental mishaps in the simulation
+  arrival_time = -1;
+  time_needed = -1;
 }
 
 Student::Student(int a, int t) //overloaded constructor, sets arrival_time and time_needed to respective passed parameters

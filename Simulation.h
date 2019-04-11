@@ -24,12 +24,12 @@ public:
   ~Simulation(); //destructor
 
   bool fileread(string filename); //reads in a file and creates the necessary objects for the simulation to run
-  bool simulationOver(); //checks if registrarFinished == true and if there are any students still in the deck waiting to arrive
+  bool simulationOver(); //checks all conditions that would instigate the end of the simulation
 
   void addTimeMatches(int t); //adds all Students for which arrival_time == t to the Registrar's waiting_students queue
-  void moveStudents(int t); //if there are free windows in the registrar and students waiting, free windows are filled with students. then registrarCycle is called.
+  void moveStudents(int t); //simulates movement during a minute at the office
   void resizeStudentDeck(); //resizes student_deck array
-  void printAnalytics(); //runs both the registrar's printWindowIdleData and printStudentWaitData
+  void printAnalytics(); //prints the results of the simulation
 
   bool noStudentsRemaining() { return (remaining_student_number <= 0); } //returns true if there are still students on deck to enter the registrar
   bool studentDeckFull() { return (total_student_number == array_size); } //returns true if the total number of students equals the max capacity of the array

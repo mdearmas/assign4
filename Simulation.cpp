@@ -130,17 +130,17 @@ bool Simulation::fileread(string filename) //reads in a file and creates the nec
   }
 }
 
-bool Simulation::simulationOver()
+bool Simulation::simulationOver() //checks all conditions that would instigate the end of the simulation
 {
-  if(r->registrarFinished() && remaining_student_number<=0)
+  if(r->registrarFinished() && remaining_student_number<=0) //if the registrar is empty and no more students are left on deck, the simulation is over
     return true;
   else
     return false;
 }
 
-void Simulation::addTimeMatches(int t)
+void Simulation::addTimeMatches(int t) //adds all Students for which arrival_time == t to the Registrar's waiting_students queue
 {
-  for(int i = (total_student_number - remaining_student_number); i < total_student_number; ++i)
+  for(int i = (total_student_number - remaining_student_number); i < total_student_number; ++i) //iterates through the students left in the array
   {
     if(t == student_deck[i].getArrivalTime())
     {
@@ -150,16 +150,16 @@ void Simulation::addTimeMatches(int t)
   }
 }
 
-void Simulation::moveStudents(int t)
+void Simulation::moveStudents(int t) //simulates movement during a minute at the office
 {
-  while(!r->studentQueueEmpty() && r->freeWindows())
+  while(!r->studentQueueEmpty() && r->freeWindows()) //if there are free windows in the registrar and students waiting, free windows are filled with students.
   {
     r->findNextFreeWindow(t);
   }
-  r->registrarCycle();
+  r->registrarCycle(); //simulates the passage of times
 }
 
-void Simulation::resizeStudentDeck()
+void Simulation::resizeStudentDeck() //resizes student_deck array
 {
   array_size = array_size * 2; //doubles the size of the array
   Student* new_deck = new Student[array_size]; //allocates an array of the new doubled size
@@ -173,7 +173,7 @@ void Simulation::resizeStudentDeck()
   student_deck = new_deck; //assigns the location of new_deck to student_deck
 }
 
-void Simulation::printAnalytics()
+void Simulation::printAnalytics() //prints the results of the simulation
 {
   r->printStudentWaitData();
   r->printWindowIdleData();
